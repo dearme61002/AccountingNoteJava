@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<link th:replace="common :: commonheader">
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <link th:replace="common :: wrapperSidebar">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <link th:replace="common :: contenttop">
+            <!-- End of Topbar -->
+            <!--            裡面-->
+            <div class="m-4">
+                <h1>流水帳分類管理</h1>
+                <a href="/manage" class="mr-2">流水帳紀錄</a><span>->>></span><span class="ml-2">流水帳管理</span>
+                <div class="m-4">
+                    <h1 th:text="${insertManage}"></h1>
+                    <form onsubmit="return disp_confirm()" action="/Manage/Insert" method="post">
+                        <input type="hidden" name="UserID" th:value="${session.LoginUser.getID()}">
+                        <table tyle="width: 1000px" class="table">
+                            <tr>
+                                <td>收/支</td>
+                                <td>
+                                    <select  name="ActType">
+                                        <option  value="0">In</option>
+                                        <option  value="1">Out</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>分類</td>
+                                <td><select  name="Category">
+
+                                    <option  th:value="${allCategoryByUser.getTitle()}" th:each="allCategoryByUser:${goManageAdd}" th:text="${allCategoryByUser.getTitle()}">#</option>
+
+
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>標題</td>
+                                <td><input name="Caption" style="width: 700px" class="ml-2" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>金額</td>
+                                <td><input name="Amount" style="width: 700px" class="ml-2" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>備註</td>
+                                <td><textarea rows="2" name="Body" class="ml-2" style="width: 700px"
+                                              cols="20"></textarea></td>
+                            </tr>
+
+                        </table>
+                        <button type="submit" class="bg-gradient-danger badge">增加</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <!--            裡面-->
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+</div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<link th:replace="common :: commonModel">
+
+<link th:replace="common :: commonJs">
+
+<script type="text/javascript">
+    function disp_confirm() {
+        if (confirm("確認要送出本表單嗎？") == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+
+</html>

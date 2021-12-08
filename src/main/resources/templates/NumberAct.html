@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<link th:replace="common :: commonheader">
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <link th:replace="common :: wrapperSidebar">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <link th:replace="common :: contenttop">
+            <!-- End of Topbar -->
+            <!--            裡面-->
+            <div class="m-4">
+                <h1>會員管理</h1>
+                <a href="/NumberList" class="mr-2">管理者後台</a><span>->>></span><span class="ml-2">會員管理</span>
+                <div class="m-4">
+<h1 th:text="${UserMsg}"></h1>
+                    <form onsubmit="return disp_confirm()" action="/User/Update" method="post">
+<input type="hidden" name="onlyID" th:value="${userData.getOnlyID()}">
+                        <table tyle="width: 1000px" class="table">
+
+
+                            <tr>
+                                <td>帳號</td>
+                                <td><span style="color: #1c606a" name="Account" th:text="${userData.getAccount()}"></span></td>
+                            </tr>
+                            <tr>
+                                <td>姓名</td>
+                                <td><input name="Name" th:value="${userData.getName()}" style="width: 700px" class="ml-2" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>E-mail</td>
+                                <td><input th:value="${userData.getEmail()}" name="Email"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   等級
+                                <td>
+                                    <select name="UserLevel">
+                                        <option th:selected="${userData.getUserLevel()=='1'}" value="1">一般會員</option>
+                                        <option value="0" th:selected="${userData.getUserLevel()=='0'}">管理者</option>
+                                    </select></td>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="mt-5">
+                            <span><span class="m-5">建立時間</span><span class="m-5" th:text="${#dates.format(userData.getCreateDate(),'yyyy-MM-dd HH:mm')}"></span></span>
+                            <span th:if="${userData.getFixdate()!=null}"><span class="m-5">修改時間</span><span class="m-5" th:text="${#dates.format(userData.getFixdate(),'yyyy-MM-dd HH:mm')}"></span></span>
+                        </div>
+                        <button type="submit" class="bg-gradient-danger mt-3 badge">修改</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <!--            裡面-->
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+</div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<link th:replace="common :: commonModel">
+
+<link th:replace="common :: commonJs">
+
+<script type="text/javascript">
+    function disp_confirm() {
+        if (confirm("確認要送出本表單嗎？") == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+
+</html>

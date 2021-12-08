@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<link th:replace="common :: commonheader">
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <link th:replace="common :: wrapperSidebar">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <link th:replace="common :: contenttop">
+            <!-- End of Topbar -->
+            <!--            裡面-->
+            <div class="m-4">
+                <h1>流水帳分類管理</h1>
+                <a href="/manage" class="mr-2">流水帳紀錄</a><span>->>></span><span class="ml-2">流水帳分類管理</span>
+                <form method="post" action="/Category/Delete">
+                <div class="m-4">
+                    <span><input type="button" class="btn-facebook" onclick="javascript:location.href='/CategoryAdd'"
+                                 value="Add"></span>
+                    <span><input type="submit" value="Del" class="btn-google" ></span>
+                </div>
+                <div class="m-4">
+                    <h1 th:text="${CategoryDelete}"></h1>
+
+                    <table class="table">
+                        <!--    allCategoryByUserID-->
+                        <tr>
+                            <td>刪除</td>
+                            <td>建立日期</td>
+                            <td>分類</td>
+                            <td>流水帳數</td>
+                            <td>Act</td>
+
+                        </tr>
+                        <tr th:each="Category:${pageCategory}">
+                            <td><input type="checkbox" th:value="${Category.getID()}" name="delete"></td>
+                            <td th:text="${Category.getCreateTime()}"></td>
+                            <td th:text="${Category.getTitle()}"></td>
+                            <td th:text="${Category.getCountAccountingNote()}"></td>
+                            <td><a th:href="@{/Category/goUpdate(CategoryID=${Category.getID()})}" >編輯</a></td>
+                        </tr>
+                    </table>
+                </form>
+                    <!--math-->
+                    <div>
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="/CategoryListPrevious">Previous</a></li>
+
+                            <li th:each="index:${#numbers.sequence(1,pageSize)}" th:class="${index == currPage ?'page-item active':'page-item'}" class="page-item"><a th:href="@{/CategoryListMath(currPage=${index})}" th:text="${index}" class="page-link" href="#">#</a></li>
+
+                            <li class="page-item"><a class="page-link" href="/CategoryListNext">Next</a></li>
+                        </ul>
+                    </div>
+                    <!--math-->
+                </div>
+
+
+            </div>
+
+            <!--            裡面-->
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+</div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<link th:replace="common :: commonModel">
+
+<link th:replace="common :: commonJs">
+
+<script type="text/javascript">
+    function disp_confirm() {
+        if (confirm("確認要送出本表單嗎？") == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+
+</html>

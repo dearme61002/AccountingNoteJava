@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link th:replace="common :: commonheader">
+<body>
+<nav class="navbar  navbar-dark bg-dark">
+    <div class="container px-5">
+        <h3 class="navbar-brand" style="text-align: left;font-size: 80px;margin-top: 30px">流水帳登入系統</h3>
+        <a class="nav-link btn btn-outline-primary" style="font-size: 40px"  href="/LoginPage">登入系統</a>
+
+    </div>
+</nav>
+
+<div style="text-align: left;margin-top: 30px;font-size: 30px;margin-left: 20px">
+    <div class="card" >
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item ml-5 mt-3" >初次記帳:<h1 style="text-align: center;font-size:35px" th:text="${index.getFirstTime()}">#</h1></li>
+            <li class="list-group-item ml-5 mt-3">最後記帳:<h1 style="text-align: center;font-size:35px" th:text="${index.getLastTime()}">#</h1></li>
+            <li class="list-group-item ml-5 mt-3">記帳數量:<h1 style="text-align: center;font-size:35px"th:text="${index.getNoteAmount()}">#</h1></li>
+            <li class="list-group-item ml-5 mt-3">會員數:<h1 style="text-align: center;font-size:35px"th:text="${index.getNumberAmount()}">#</h1></li>
+        </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>

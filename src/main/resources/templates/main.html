@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<link th:replace="common :: commonheader">
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <link th:replace="common :: wrapperSidebar">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <link th:replace="common :: contenttop">
+            <!-- End of Topbar -->
+            <!--            裡面-->
+            <div class="m-4">
+                <h1>目前頁面</h1>
+                <a href="common.html" class="mr-2">後台管理</a><span>->>></span><span class="ml-2">個人資訊</span>
+
+                <div class="mt-4">
+                    <h1 th:text="${UpateOneUser}"></h1>
+                    <form onsubmit="return disp_confirm()" action="/updateOneUser" method="post">
+                        <table style="width: 1000px" class="table">
+                            <input type="hidden" name="id" th:value="${session.LoginUser.getID()}">
+                            <tr>
+                                <td>帳號</td>
+                                <td><input th:value="${session.LoginUser.getAccount()}" name="account" style="width: 700px" type="text">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>姓名</td>
+                                <td><input th:value="${session.LoginUser.getName()}" name="name" type="text" style="width: 700px">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>E-mail</td>
+                                <td><input th:value="${session.LoginUser.getEmail()}" name="email" type="text" style="width: 700px">
+                                </td>
+
+                            </tr>
+                        </table>
+                        <button type="submit"  class="bg-gradient-danger badge">儲存</button>
+                    </form>
+                </div>
+            </div>
+
+            <!--            裡面-->
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+</div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<link th:replace="common :: commonModel">
+
+<link th:replace="common :: commonJs">
+
+<script type="text/javascript">
+    function disp_confirm() {
+        if (confirm("確認要送出本表單嗎？") == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+
+</html>
